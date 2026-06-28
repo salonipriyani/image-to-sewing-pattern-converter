@@ -1,0 +1,24 @@
+# API & server
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+
+# Anthropic
+anthropic==0.34.0
+
+# LangGraph
+langgraph==0.2.28
+langchain-anthropic==0.2.4
+
+# Data validation
+pydantic==2.9.2
+pydantic-settings==2.5.2
+
+# Templating
+jinja2==3.1.4
+
+# PDF generation
+reportlab==4.2.2
+
+# Utilities
+python-dotenv==1.0.1
