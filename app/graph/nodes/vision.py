@@ -3,6 +3,8 @@ import logging
 from anthropic import Anthropic
 from app.config import get_settings
 from app.graph.state import PatternState, GarmentDescription
+from app.graph.utils import extract_json
+
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
@@ -59,7 +61,7 @@ def vision_node(state: PatternState) -> dict:
         )
 
         raw = response.content[0].text.strip()
-        parsed = json.loads(raw)
+        parsed = json.loads(extract_json(raw))
         garment_description = GarmentDescription(**parsed)
 
         logger.info(f"Vision node: identified '{garment_description.garment_type}'")

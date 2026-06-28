@@ -100,8 +100,9 @@ def create_app() -> FastAPI:
     @app.get("/", response_class=HTMLResponse, include_in_schema=False)
     async def index(request: Request):
         return templates.TemplateResponse(
-            "index.html",
-            {"request": request, "app_name": settings.app_name}
+            request=request,
+            name="index.html",
+            context={"app_name": settings.app_name}
         )
 
     return app

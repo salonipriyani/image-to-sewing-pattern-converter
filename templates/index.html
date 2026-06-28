@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>{{ app_name }}</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/static/css/main.css"/>
+</head>
+<body>
+<div class="grain"></div>
+<div class="app">
+
+  <header>
+    <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 4 L40 14 L40 34 L24 44 L8 34 L8 14 Z" stroke="#8b6f47" stroke-width="1" fill="none"/>
+      <path d="M24 4 L24 44 M8 14 L40 34 M40 14 L8 34" stroke="#8b6f47" stroke-width="0.5" opacity="0.4"/>
+      <circle cx="24" cy="24" r="3" fill="#c4633a"/>
+    </svg>
+    <h1>ATELIER</h1>
+    <p class="subtitle">Sketch to Sewing Pattern</p>
+    <div class="header-rule"></div>
+  </header>
+
+  <!-- Upload -->
+  <div class="upload-zone" id="uploadZone">
+    <input type="file" id="fileInput" accept="image/*"/>
+    <span class="upload-icon">✦</span>
+    <p class="upload-title">Drop your sketch or garment photo</p>
+    <p class="upload-hint">Supports JPG, PNG, WEBP — fashion sketches or real garments</p>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview-wrap" id="previewWrap">
+    <img id="previewImg" src="" alt="Uploaded garment"/>
+    <div class="preview-actions">
+      <button class="btn-remove" id="btnRemove">✕ Remove</button>
+    </div>
+  </div>
+
+  <!-- Measurements -->
+  <div class="measurements-panel">
+    <div class="panel-title">Body Measurements</div>
+    <div class="measurements-grid">
+      <div class="field-group">
+        <label for="bust">Bust / Chest (cm)</label>
+        <input type="number" id="bust" name="bust" placeholder="90" min="1" max="200"/>
+      </div>
+      <div class="field-group">
+        <label for="waist">Waist (cm)</label>
+        <input type="number" id="waist" name="waist" placeholder="70" min="1" max="200"/>
+      </div>
+      <div class="field-group">
+        <label for="hips">Hips (cm)</label>
+        <input type="number" id="hips" name="hips" placeholder="96" min="1" max="200"/>
+      </div>
+      <div class="field-group">
+        <label for="height">Height (cm)</label>
+        <input type="number" id="height" name="height" placeholder="168" min="1" max="250"/>
+      </div>
+      <div class="field-group">
+        <label for="shoulder_width">Shoulder Width (cm)</label>
+        <input type="number" id="shoulder_width" name="shoulder_width" placeholder="38" min="1" max="80"/>
+      </div>
+      <div class="field-group">
+        <label for="skill_level">Skill Level</label>
+        <select id="skill_level" name="skill_level">
+          <option value="beginner">Beginner</option>
+          <option value="intermediate" selected>Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-generate" id="btnGenerate">
+    <span>Generate Pattern & Instructions</span>
+  </button>
+
+  <div class="error-box" id="errorBox"></div>
+
+  <!-- Loading -->
+  <div class="loading-state" id="loadingState">
+    <div class="spinner-wrap">
+      <div class="thread-dot"></div>
+      <div class="thread-dot"></div>
+      <div class="thread-dot"></div>
+    </div>
+    <p class="loading-text" id="loadingText">Analysing your garment...</p>
+    <p class="loading-sub" id="loadingSub">Reading seams, silhouette & construction details</p>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+
+    <div class="result-section">
+      <div class="result-header">
+        <span class="result-label">Garment Analysis</span>
+        <span class="result-tag">AI Vision</span>
+      </div>
+      <div class="result-body" id="analysisBody"></div>
+    </div>
+
+    <div class="result-section">
+      <div class="result-header">
+        <span class="result-label">Pattern Pieces</span>
+        <span class="result-tag">Cut List</span>
+      </div>
+      <div class="result-body" id="piecesBody"></div>
+    </div>
+
+    <div class="result-section">
+      <div class="result-header">
+        <span class="result-label">Sewing Instructions</span>
+        <span class="result-tag">Step by Step</span>
+      </div>
+      <div class="result-body" id="instructionsBody"></div>
+    </div>
+
+    <div class="result-section">
+      <div class="result-header">
+        <span class="result-label">Materials & Notions</span>
+        <span class="result-tag">Shopping List</span>
+      </div>
+      <div class="result-body" id="materialsBody"></div>
+    </div>
+
+    <button class="btn-pdf" id="btnPDF">
+      ⬇ Download PDF Pattern
+    </button>
+
+  </div>
+
+</div>
+<script src="/static/js/main.js"></script>
+</body>
+</html>

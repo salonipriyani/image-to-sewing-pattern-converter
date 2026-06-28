@@ -3,6 +3,8 @@ import logging
 from anthropic import Anthropic
 from app.config import get_settings
 from app.graph.state import PatternState, SewingStep
+from app.graph.utils import extract_json
+
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
@@ -35,6 +37,8 @@ Rules for materials_list:
 - Include all notions (zip, buttons, interfacing, thread etc.)
 - Include tools needed
 - Format each item as a single string e.g. "1.8m main fabric (cotton lawn, 115cm wide)"
+- Limit to a maximum of 15 steps — be concise but complete
+
 
 Respond ONLY with a valid JSON object. No markdown, no backticks, no explanation:
 
@@ -102,7 +106,8 @@ def instructions_node(state: PatternState) -> dict:
     try:
         response = client.messages.create(
             model=settings.claude_model,
-            max_tokens=3000,  # instructions can be long
+            max_tokens=4000,
+            system="You are a sewing instructor that outputs ONLY valid JSON. Never truncate your response. Always close all brackets and braces. Never add commentary before or after the JSON.",
             messages=[
                 {
                     "role": "user",
@@ -112,7 +117,7 @@ def instructions_node(state: PatternState) -> dict:
         )
 
         raw = response.content[0].text.strip()
-        parsed = json.loads(raw)
+        parsed = json.loads(extract_json(raw))
 
         sewing_steps = [SewingStep(**step) for step in parsed["sewing_steps"]]
         materials_list = parsed["materials_list"]

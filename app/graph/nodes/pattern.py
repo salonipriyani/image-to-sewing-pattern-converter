@@ -3,6 +3,8 @@ import logging
 from anthropic import Anthropic
 from app.config import get_settings
 from app.graph.state import PatternState, PatternPiece, PatternDimension
+from app.graph.utils import extract_json
+
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
@@ -103,7 +105,7 @@ def pattern_node(state: PatternState) -> dict:
         )
 
         raw = response.content[0].text.strip()
-        parsed = json.loads(raw)
+        parsed = json.loads(extract_json(raw))
 
         pattern_pieces = [PatternPiece(**piece) for piece in parsed]
 

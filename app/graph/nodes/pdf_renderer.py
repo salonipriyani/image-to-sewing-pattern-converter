@@ -10,6 +10,8 @@ from reportlab.platypus import (
 )
 from app.config import get_settings
 from app.graph.state import PatternState
+from app.graph.utils import extract_json
+
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
