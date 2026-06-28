@@ -167,15 +167,6 @@ WeasyPrint requires system-level Pango/Cairo libraries that are difficult to ins
 
 ---
 
-## Roadmap
-
-- [ ] SVG pattern piece rendering
-- [ ] Async job queue (Celery + Redis) for long-running pipelines
-- [ ] User accounts and pattern history
-- [ ] Multi-size grading
-
----
-
 ## License
 
 MIT
